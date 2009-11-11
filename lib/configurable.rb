@@ -1,7 +1,7 @@
-# ConfigurationHelper
-%w{ configuration }.each { |h| require "configuration_helper/#{h}" }
+# Configurable
+%w{ configuration }.each { |h| require "configurable/#{h}" }
 
-module ConfigurationHelper
+module Configurable
   include Configuration
   
   config_path  = "#{RAILS_ROOT}/config"

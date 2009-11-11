@@ -1,1 +1,1 @@
-require File.dirname(__FILE__) + "/lib/configuration_helper"
+require File.dirname(__FILE__) + "/lib/configurable"
