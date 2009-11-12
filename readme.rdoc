@@ -8,12 +8,12 @@ within your environments/ directory.
 
 Example YAML File:
 
-meta:
-  keywords: "some, keywords, here"
-  description: "Some description here."
+  meta:
+    keywords: "some, keywords, here"
+    description: "Some description here."
 
 Accessing values:
 
-c(:meta, :keywords)
+  c(:meta, :keywords)
 
 Copyright (c) 2009 Josh Nesbitt <josh@josh-nesbitt.net>
