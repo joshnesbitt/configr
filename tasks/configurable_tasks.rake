@@ -11,7 +11,7 @@ namespace :configurable do
     FileUtils.cp template, File.join(destination, "environment.yml")
     
     environments.each { |f| FileUtils.cp(template, File.join(destination, "environments", "#{f}.yml")) }
-    puts ">> Added configuration files for:"
+    puts ">> Added configuration files:"
     puts "+ config/environment.yml"
     environments.each { |e| puts "+ config/environments/#{e}.yml" }
   end
