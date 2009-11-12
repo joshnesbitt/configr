@@ -3,7 +3,7 @@ module Configuration
   
   def self.setup(files)
     files.each { |f| load f }
-    # Include for models, mailers and controllers
+    # Include for all models, mailers, controllers and views
     ActionController::Base.send :include, Helpers
     ActiveRecord::Base.send :include, Helpers
     ActionMailer::Base.send :include, Helpers

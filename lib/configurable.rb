@@ -1,12 +1,13 @@
 # Configurable
-%w{ configuration }.each { |h| require "configurable/#{h}" }
+require "configurable/configuration"
 
 module Configurable
   include Configuration
   
-  config_path  = "#{RAILS_ROOT}/config"
-  config_files = ["#{config_path}/environment.yml",
-                  "#{config_path}/environments/#{RAILS_ENV}.yml"]
+  config_path  = File.join(RAILS_ROOT, "config")
+  config_files = [File.join(config_path, "environment.yml"),
+                  File.join(config_path, "environments", "#{RAILS_ENV}.yml")]
   
   Configuration.setup config_files
+  
 end

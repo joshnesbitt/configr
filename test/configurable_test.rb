@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class ConfigurationHelperTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
+  
+  # Need to write tests...
   test "the truth" do
     assert true
   end
+  
 end
