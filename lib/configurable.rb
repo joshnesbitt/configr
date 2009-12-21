@@ -1,5 +1,5 @@
 # Configurable
-require "configurable/configuration"
+require File.join(File.dirname(__FILE__), "configurable", "configuration")
 
 module Configurable
   include Configuration
