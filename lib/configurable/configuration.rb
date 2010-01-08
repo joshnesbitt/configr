@@ -6,6 +6,7 @@ module Configuration
     # Include for all models, mailers, controllers and views
     ActionController::Base.send :include, Helpers
     ActiveRecord::Base.send :include, Helpers
+    ActiveRecord::Observer.send :include, Helpers
     ActionMailer::Base.send :include, Helpers
   end
   
