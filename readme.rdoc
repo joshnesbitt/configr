@@ -1,19 +1,17 @@
-=== Configurable
+= configurable
 
-Configurable is a simple way to access YAML config values within your Rails app. Simply have an environment.yml file located in
-RAILS_ROOT/config. If you want environment specific values, also have an environment file present for the current environment (e.g. production.yml)
-within your environments/ directory.
+Description goes here.
 
-=== Example
+== Note on Patches/Pull Requests
+ 
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Commit, do not mess with rakefile, version, or history.
+  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
 
-Example YAML File:
+== Copyright
 
-  meta:
-    keywords: "some, keywords, here"
-    description: "Some description here."
-
-Accessing values:
-
-  c(:meta, :keywords)
-
-Copyright (c) 2009 Josh Nesbitt <josh@josh-nesbitt.net>
+Copyright (c) 2010 Josh Nesbitt. See LICENSE for details.
