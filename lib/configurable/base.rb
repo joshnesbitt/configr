@@ -1,4 +1,6 @@
 require 'yaml'
+require 'hashie'
+require 'errors'
 
 module Configurable
   class << self
@@ -13,11 +15,16 @@ module Configurable
     end
     
     def method_missing(method, *args)
+      raise NotConfigured, "No configuration has been loaded yet" unless defined?(@@configuration)
+      
       method = method.to_s
+      last   = method[method.size - 1].chr
       
       case
-      when method.to_s.include?("=") # make this better (regex)
-        @@configuration[method.to_s.gsub("=", "")] = args.first if args.first
+      when last == "="
+        @@configuration[method.gsub("=", "")] = args.first if args.first
+      when last == "?"
+        !@@configuration[method.gsub("?", "")].nil?
       when (value = @@configuration[method])
         value
       else
