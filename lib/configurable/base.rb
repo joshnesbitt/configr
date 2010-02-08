@@ -21,8 +21,6 @@ module Configurable
       when (value = @@configuration[method])
         value
       else
-        # Here we can either raise no_method for Object or nil...
-        # super(method.to_sym, *args)
         nil
       end
     end
