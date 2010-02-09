@@ -1,5 +1,4 @@
 require 'yaml'
-require 'hashie'
 require 'errors'
 
 module Configurable
