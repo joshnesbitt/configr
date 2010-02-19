@@ -1,6 +1,16 @@
-= configurable
+= Configurable
+
+* Overview
+* Installation
+* Usage
+* Usage (in Rails)
+* Contributors
+
+== Overview
 
 Description goes here.
+
+
 
 == Note on Patches/Pull Requests
  
