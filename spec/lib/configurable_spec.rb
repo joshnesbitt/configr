@@ -1,110 +1,102 @@
-describe Configurable do
-  
-  it "should have the #configure class method to instantiate the configuration" do
-    Configurable.should respond_to(:configure)
-  end
-  
-  it "should error if the configuration has not been loaded" do
-    lambda { Configurable.some_key }.should raise_error(Configurable::NotConfigured)
-  end
-  
-  it "should return nil when a value is not set" do
-    Configurable.configure do |config|
-      config.key = "value"
+module Configurable
+  describe Configuration do
+
+    it "should have the #configure class method to instantiate the configuration" do
+      Configuration.should respond_to(:configure)
     end
-    
-    Configurable.other_key.should be_nil
-  end
-  
-  it "should return a value for a key when one has been set" do
-    Configurable.configure do |config|
-      config.key = "value"
+
+    it "should return nil when a value is not set" do
+      config = Configuration.configure do |config|
+        config.key = "value"
+      end
+
+      config.other_key.should be_nil
     end
-    
-    Configurable.key.should == "value"
-  end
-  
-  it "should allow an existing value to be updated" do
-    Configurable.configure do |config|
-      config.key = "value"
+
+    it "should return a value for a key when one has been set" do
+      config = Configuration.configure do |config|
+        config.key = "value"
+      end
+
+      config.key.should == "value"
     end
-    
-    Configurable.key.should == "value"
-    Configurable.key         = "other_value"
-    Configurable.key.should == "other_value"
-  end
-  
-  it "should report a value being present on #attribute?" do
-    Configurable.configure do |config|
-      config.key = "value"
+
+    it "should raise an error when an existing value attempts to be updated" do
+      config = Configuration.configure do |config|
+        config.key = "value"
+      end
+
+      lambda { config.key = "othervalue" }.should raise_error
+
     end
-    
-    Configurable.key?.should         == true
-    Configurable.other_value?.should == false
-  end
-  
-  it "should load a configuration from a YAML string" do
-    yaml = <<-YAML
-    first_name: Josh
-    location: Leeds
-    YAML
-    
-    Configurable.configure(yaml)
-    
-    Configurable.first_name.should == "Josh"
-    Configurable.location.should   == "Leeds"
-  end
-  
-  it "should load a configuration from a YAML string and a block" do
-    yaml = <<-YAML
-    first_name: Josh
-    location: Leeds
-    YAML
-    
-    Configurable.configure(yaml) do |config|
-      config.from_block = "value"
+
+    it "should report a value being present on #attribute?" do
+      config = Configuration.configure do |config|
+        config.key = "value"
+      end
+
+      config.key?.should         == true
+      config.other_value?.should == false
     end
-    
-    Configurable.first_name.should   == "Josh"
-    Configurable.location.should     == "Leeds"
-    Configurable.from_block.should   == "value"
-  end
-  
-  it "should load a configation from a YAML file" do
-    file = File.expand_path(File.join('spec', 'fixtures', 'configuration.yml'))
-    
-    Configurable.configure(file)
-    
-    Configurable.first_name.should == "Bob"
-    Configurable.location.should   == "Somewhere else"
-  end
-  
-  it "should load a configation from a YAML file and a block" do
-    file = File.expand_path(File.join('spec', 'fixtures', 'configuration.yml'))
-    
-    Configurable.configure(file) do |config|
-      config.hello = "value"
+
+    it "should load a configuration from a YAML string" do
+      yaml = <<-YAML
+      first_name: Josh
+      location: Leeds
+      YAML
+
+      config = Configuration.configure(yaml)
+
+      config.first_name.should == "Josh"
+      config.location.should   == "Leeds"
     end
-    
-    Configurable.first_name.should == "Bob"
-    Configurable.location.should   == "Somewhere else"
-    Configurable.hello.should      == "value"
-  end
-  
-  it "should allow a value from YAML to be overriden through the block" do
-    file = File.expand_path(File.join('spec', 'fixtures', 'configuration.yml'))
-    
-    Configurable.configure(file) do |config|
-      config.hello = "value"
+
+    it "should load a configuration from a YAML string and a block" do
+      yaml = <<-YAML
+      first_name: Josh
+      location: Leeds
+      YAML
+
+      config = Configuration.configure(yaml) do |config|
+        config.from_block = "value"
+      end
+
+      config.first_name.should   == "Josh"
+      config.location.should     == "Leeds"
+      config.from_block.should   == "value"
     end
-    
-    Configurable.first_name.should == "Bob"
-    
-    Configurable.configure(file) do |config|
-      config.first_name = "Billy"
+
+    it "should load a configation from a YAML file" do
+      file = File.expand_path(File.join('spec', 'fixtures', 'configuration.yml'))
+
+      config = Configuration.configure(file)
+
+      config.first_name.should == "Bob"
+      config.location.should   == "Somewhere else"
     end
-    
-    Configurable.first_name.should == "Billy"
+
+    it "should load a configation from a YAML file and a block" do
+      file = File.expand_path(File.join('spec', 'fixtures', 'configuration.yml'))
+
+      config = Configuration.configure(file) do |config|
+        config.hello = "value"
+      end
+
+      config.first_name.should == "Bob"
+      config.location.should   == "Somewhere else"
+      config.hello.should      == "value"
+    end
+
+    it "should allow a value from YAML to have precedence over the block" do
+      file = File.expand_path(File.join('spec', 'fixtures', 'configuration.yml'))
+
+      config = Configuration.configure(file) do |config|
+        config.first_name = "Billy"
+      end
+
+      config.first_name.should == "Bob"
+    end
+
   end
   
 end

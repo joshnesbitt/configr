@@ -9,5 +9,6 @@ module Configurable
   end
   
   class NotConfigured < ConfigurableError; end
+  class ConfigurationLocked < ConfigurableError; end
   
 end
