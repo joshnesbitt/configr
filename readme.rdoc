@@ -10,8 +10,6 @@
 
 Description goes here.
 
-
-
 == Note on Patches/Pull Requests
  
 * Fork the project.

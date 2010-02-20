@@ -1,4 +1,5 @@
 require 'yaml'
+require 'core_ext'
 require 'errors'
 require 'configuration_block'
 
@@ -43,15 +44,10 @@ module Configurable
       return unless self.yaml
       
       other_hash = hash_from_yaml!
-      other_hash = symbolize_keys!(other_hash)
+      
+      other_hash.recursive_symbolize_keys!
       
       self.attributes.merge!(other_hash)
-    end
-    
-    def symbolize_keys!(hash)
-      symbolized_hash = {}
-      hash.each_pair { |k,v| symbolized_hash.merge!({k.to_sym => v}) }
-      symbolized_hash
     end
     
     private
