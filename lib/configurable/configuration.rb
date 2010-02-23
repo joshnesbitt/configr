@@ -18,7 +18,7 @@ module Configurable
       yield instance.base if block_given?
       
       instance.attributes = instance.base.attributes
-      instance.merge_configs!
+      instance.merge_configurations!
       
       instance
     end
@@ -26,7 +26,7 @@ module Configurable
     def [](value)
       self.attributes[value]
     end
-
+    
     def method_missing(method, *args, &block)
       name = method.to_s
       
@@ -40,19 +40,18 @@ module Configurable
       end
     end
     
-    def merge_configs!
+    def merge_configurations!
       return unless self.yaml
       
-      other_hash = hash_from_yaml!
+      hash = if File.exists?(self.yaml)
+        YAML.load_file(self.yaml)
+      else
+        YAML.load(self.yaml)
+      end
       
-      other_hash.recursive_symbolize_keys!
+      hash.recursive_symbolize_keys!
       
-      self.attributes.merge!(other_hash)
-    end
-    
-    private
-    def hash_from_yaml!
-      File.exists?(self.yaml) ? YAML.load_file(self.yaml) : YAML.load(self.yaml)
+      self.attributes.merge!(hash)
     end
   end
 end

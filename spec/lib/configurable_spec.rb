@@ -96,7 +96,7 @@ module Configurable
       configuration.first_name.should == "Bob"
     end
     
-    it "should allo a deeply nested hash to be accessed with hash notation" do
+    it "should allow a deeply nested hash to be accessed with hash notation" do
       configuration = Configuration.configure do |config|
         config.one.two.three.four = "value"
       end
