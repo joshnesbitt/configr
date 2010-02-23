@@ -10,9 +10,10 @@ module Configurable
       name = method.to_s
       
       if(name.include?('='))
-        attributes[name.gsub('=','').to_sym] = args.first
-      elsif(existing_block = self.attributes[method])
-        ConfigurationBlock.new(existing_block)
+        key = name.gsub('=','').to_sym
+        self.attributes[key] = args.first
+      elsif(existing_block_attributes = self.attributes[method])
+        ConfigurationBlock.new(existing_block_attributes)
       else
         nested_block = ConfigurationBlock.new
         self.attributes[method] = nested_block.attributes

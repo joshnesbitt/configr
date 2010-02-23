@@ -18,7 +18,10 @@ module Configurable
       yield instance.base if block_given?
       
       instance.attributes = instance.base.attributes
+      
       instance.merge_configurations!
+      
+      instance.attributes.recursive_normalize!
       
       instance
     end
@@ -50,7 +53,7 @@ module Configurable
       end
       
       hash = Hash.new(hash)
-      hash.recursive_normalize!
+      hash.recursive_symbolize_keys!
       
       self.attributes.merge!(hash)
     end

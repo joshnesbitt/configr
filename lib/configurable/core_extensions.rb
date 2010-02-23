@@ -4,7 +4,7 @@ module Configurable
   class Hash < ::Hash
     
     def initialize(hash)
-      hash.each_pair { |key, val| self[key] = val }
+      hash ? hash.each_pair { |key, val| self[key] = val } : self
     end
     
     def symbolize_keys!
