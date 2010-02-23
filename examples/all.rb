@@ -58,14 +58,14 @@ puts config.example_four
 # Good for things like this
 
 c = Configurable::Configuration.configure do |config|
-  config.support_email = "josh@josh-nesbitt.net"
-  config.google_analytics_key = "UA-x343x-SDS"
+  config.support_email    = "josh@josh-nesbitt.net"
+  config.google_analytics = "UA-x343x-SDS"
   
   config.twitter.screen_name = "joshnesbitt"
   config.twitter.password    = "mypassword"
 end
 
 puts c.support_email
-puts c.google_analytics_key
+puts c.google_analytics
 puts c.twitter[:screen_name]
 puts c.twitter[:password]
