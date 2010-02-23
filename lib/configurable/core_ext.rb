@@ -10,7 +10,7 @@ module Configurable
       self.symbolize_keys!
       self.values.select{ |value| value.is_a?(Hash) }.each{ |hash| hash.recursive_symbolize_keys! }
     end
-
+    
     def method_missing(method, *args)
       self[method]
     end

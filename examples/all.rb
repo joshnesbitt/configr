@@ -1,6 +1,5 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'configurable'))
 
-
 # Standalone (without YAML)
 
 config = Configurable::Configuration.configure do |config|
@@ -75,3 +74,4 @@ puts c.twitter[:password]
 puts c.twitter.screen_name
 puts c.twitter.password
 puts c.one.long.value.chain
+puts c.one.long.value.that_doesnt_exist
