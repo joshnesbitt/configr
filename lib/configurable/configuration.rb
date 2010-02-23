@@ -1,48 +1,57 @@
-module Configuration
-  mattr_accessor :config
-  
-  def self.setup(files)
-    files.each { |f| load f }
-    # Include for all models, mailers, controllers and views
-    ActionController::Base.send :include, Helpers
-    ActiveRecord::Base.send :include, Helpers
-    ActiveRecord::Observer.send :include, Helpers
-    ActionMailer::Base.send :include, Helpers
-  end
-  
-  def self.load(filename)
-    if File.exists?(filename) && (env_config = YAML.load_file(filename))
-      if @@config.nil?
-        @@config = env_config
-      else
-        @@config.merge! env_config
-      end
-    end
-  end
-  
-  module Helpers
-    
-    def self.included(base)
-      if base.respond_to? :helper_method
-        base.send :helper_method, :get_config
-        base.send :helper_method, :c
-      end
-    end
-    
-    def get_config(*args)
-      value = Configuration.config
-      arg_count = args.length
-      i = 0
-      while(value and i < arg_count)
-        key = args[i]
-        key = key.to_s if key.is_a? Symbol
-        value = value[key]
-        i = i + 1
-      end
-      value
-    end
-    alias_method :c, :get_config
-    
-  end
+require 'yaml'
+require 'core_ext'
+require 'errors'
+require 'configuration_block'
 
+module Configurable
+  class Configuration
+    attr_accessor :base, :attributes, :yaml
+    
+    def initialize(yaml=nil)
+      self.base = ConfigurationBlock.new
+      self.yaml = yaml
+    end
+    
+    def self.configure(yaml=nil)
+      instance = self.new(yaml)
+      
+      yield instance.base if block_given?
+      
+      instance.attributes = instance.base.attributes
+      instance.merge_configurations!
+      
+      instance
+    end
+    
+    def [](value)
+      self.attributes[value]
+    end
+    
+    def method_missing(method, *args, &block)
+      name = method.to_s
+      
+      case
+      when name.include?("=")
+        raise ConfigurationLocked, "Blocked from configuring values after configuration has been run."
+      when name.include?("?")
+        !self.attributes[name.gsub("?", "").to_sym].nil?
+      else
+        self.attributes[method.to_sym] or self.attributes[method.to_s]
+      end
+    end
+    
+    def merge_configurations!
+      return unless self.yaml
+      
+      hash = if File.exists?(self.yaml)
+        YAML.load_file(self.yaml)
+      else
+        YAML.load(self.yaml)
+      end
+      
+      hash.recursive_symbolize_keys!
+      
+      self.attributes.merge!(hash)
+    end
+  end
 end
