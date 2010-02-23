@@ -103,5 +103,24 @@ module Configurable
       
       configuration.one[:two][:three][:four].should == "value"
     end
+    
+    it "should allow more than one value to be assigned within the same namespace" do
+      configuration = Configuration.configure do |config|
+        config.one.two.three.var1 = "value"
+        config.one.two.three.var2 = "value"
+      end
+      
+      configuration.one[:two][:three][:var1].should == "value"
+      configuration.one[:two][:three][:var2].should == "value"
+    end
+    
+    it "should allow method like lookup of attributes" do
+      configuration = Configuration.configure do |config|
+        config.one.two.three.var1 = "value"
+      end
+      
+      configuration.one.two.three.var1.should == "value"
+    end
   end
 end
+  

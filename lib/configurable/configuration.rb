@@ -49,7 +49,8 @@ module Configurable
         YAML.load(self.yaml)
       end
       
-      hash.recursive_symbolize_keys!
+      hash = Hash.new(hash)
+      hash.recursive_normalize!
       
       self.attributes.merge!(hash)
     end
