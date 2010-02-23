@@ -63,9 +63,15 @@ c = Configurable::Configuration.configure do |config|
   
   config.twitter.screen_name = "joshnesbitt"
   config.twitter.password    = "mypassword"
+  
+  config.one.long.value.chain = "value"
 end
 
 puts c.support_email
 puts c.google_analytics
 puts c.twitter[:screen_name]
 puts c.twitter[:password]
+
+puts c.twitter.screen_name
+puts c.twitter.password
+puts c.one.long.value.chain
