@@ -1,5 +1,5 @@
 require 'yaml'
-require 'core_ext'
+require 'core_extensions'
 require 'errors'
 require 'configuration_block'
 
