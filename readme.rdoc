@@ -3,12 +3,30 @@
 * Overview
 * Installation
 * Usage
-* Usage (in Rails)
+* Usage (within frameworks)
 * Contributors
 
 == Overview
 
-Description goes here.
+Configurable aims to provide a more Ruby-like interface to configuring and reading a set of configuration values.
+
+== Installation
+
+The project is hosted on RubyGems.org. Getting it is simple:
+
+  gem install <gem name>
+
+== Usage
+
+Todo
+
+== Usage (within frameworks)
+
+How to use in Rails/Sinatra/Hot New Framework.
+
+== Contributors
+
+* Thomas Williams for the concept of nested configuration blocks.
 
 == Note on Patches/Pull Requests
  
