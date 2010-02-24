@@ -8,7 +8,6 @@ module Configurable
     end
   end
   
-  class NotConfigured       < ConfigurableError; end
   class ConfigurationLocked < ConfigurableError; end
   
 end
