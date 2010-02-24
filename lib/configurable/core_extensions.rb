@@ -1,5 +1,3 @@
-# TODO: Move this version of hash to a namespaced Configurable::Hash.
-# Don't want to conflict with other hashes elsewhere...
 module Configurable
   class Hash < ::Hash
     

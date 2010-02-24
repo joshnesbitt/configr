@@ -57,13 +57,11 @@ puts config.example_four
 # Good for things like this
 
 c = Configurable::Configuration.configure do |config|
-  config.support_email    = "josh@josh-nesbitt.net"
+  config.support_email    = "goaway@example.com"
   config.google_analytics = "UA-x343x-SDS"
   
-  config.twitter.screen_name = "joshnesbitt"
-  config.twitter.password    = "mypassword"
-  
-  config.one.long.value.chain = "value"
+  config.twitter.screen_name = "someone"
+  config.twitter.password    = "somepass"
 end
 
 puts c.support_email
@@ -73,5 +71,3 @@ puts c.twitter[:password]
 
 puts c.twitter.screen_name
 puts c.twitter.password
-puts c.one.long.value.chain
-puts c.one.long.value.that_doesnt_exist
