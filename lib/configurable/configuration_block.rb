@@ -13,7 +13,8 @@ module Configurable
         key = name.gsub('=','').to_sym
         self.attributes[key] = args.first
       elsif(existing_block_attributes = self.attributes[method])
-        ConfigurationBlock.new(existing_block_attributes)
+        existing_block = ConfigurationBlock.new(existing_block_attributes)
+        existing_block
       else
         nested_block = ConfigurationBlock.new
         self.attributes[method] = nested_block.attributes
