@@ -8,7 +8,7 @@
 
 == Overview
 
-Configurable aims to provide a more Ruby-like interface to configuring and reading a set of configuration values.
+Configurable aims to provide a more Ruby-like interface to configuring and reading a set of configuration values. The idea evolved from using a standard hash as a configuration store into a more elegant way to declare and read values from within a hash.
 
 == Installation
 
@@ -18,11 +18,105 @@ The project is hosted on RubyGems.org. Getting it is simple:
 
 == Usage
 
-Todo
+There are a variety of ways in which you can use Configurable:
+
+* Standalone block
+* From inline YAML
+* From a YAML file
+* A mixture of YAML and block configuration
+
+The following examples can also be found and run in _examples/all.rb_.
+
+=== Standalone Block
+
+  configuration = Configurable::Configuration.configure do |config|
+    config.example_one = "One"
+    config.example_two = "Two"
+  end
+  
+  puts configuration.example_one
+  puts configuration.example_two
+
+Conceptually you could continue to nest configuration blocks as far as you wish. They exist to enable you to seperate your configuration values into contexts. Take for example a set of email configuration values:
+
+  Configurable::Configuration.configure do |config|
+    config.email.from_address  = "hello@example.com"
+    config.email.from_name     = "My Company"
+    config.email.reply_address = "reply@example.com"
+  end
+
+=== From an inline YAML string
+
+  yaml = <<YAML
+
+  example_one: "Hello"
+  example_two: "It loads from YAML too!"
+  
+  YAML
+  
+  configuration = Configurable::Configuration.configure(yaml)
+
+  puts configuration.example_one
+  puts configuration.example_two
+
+=== From a YAML file
+
+  configuration = Configurable::Configuration.configure("/path/to/file.yml")
+  
+  puts configuration.value_one
+  puts configuration.value_two
+
+=== A mixture of any of the above
+
+  yaml = <<YAML
+
+  example_three: "Oooooo"
+  example_four: "It loads from YAML too!"
+
+  YAML
+  
+  configuration = Configurable::Configuration.configure(yaml) do |config|
+    config.example_one = "One"
+    config.example_two = "Two"
+  end
+
+  puts configuration.example_one
+  puts configuration.example_two
+  puts configuration.example_three
+  puts configuration.example_four
 
 == Usage (within frameworks)
 
-How to use in Rails/Sinatra/Hot New Framework.
+Configurable is intended to be framework agnostic, therefore it's easy to get it going in Rails/Sinatra/Hot New Framework.
+
+=== Rails
+
+You can use Configurable within Rails quite easily. I don't really plan to provide any _out of the box_ way to hook Configurable into Rails but it's quite easy to implement:
+
+  # In config/configuration.rb
+  Config = Configurable::Configuration.configure(Rails.root.join("config", "environments", "#{Rails.env}.yml")) do |config|
+    config.my.configuration.value = "value"
+  end
+  
+  # In config/initializers/configuration.rb
+  require Rails.root.join("config", "configuration.rb")
+  
+  # Anywhere in your Rails app
+  Config.my.configuration.value
+
+By requiring a different YAML file based on the environment it is easy to override global values with environment specific values.
+
+=== Sinatra
+
+A quick and dirty solution would be to pop it in a _configure_ block:
+
+  configure do
+    Config = Configurable::Configuration.configure(File.join("#{environment}.yml")) do |config|
+      config.something = "value"
+    end
+  end
+
+Again, by requiring a different YAML file based on the environment it is easy to override global values with environment specific values.
 
 == Contributors
 

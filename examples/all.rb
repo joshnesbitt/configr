@@ -2,61 +2,61 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'configu
 
 # Standalone (without YAML)
 
-config = Configurable::Configuration.configure do |config|
+configuration = Configurable::Configuration.configure do |config|
   config.example_one = "One"
   config.example_two = "Two"
 end
 
-puts config.example_one
-puts config.example_two
-puts config.doesnt_exist
+puts configuration.example_one
+puts configuration.example_two
+puts configuration.doesnt_exist
 
 
 # With YAML (inline)
 
-yaml = <<CONTENT
+yaml = <<YAML
 
 example_one: "Oooooo"
 example_two: "It loads from YAML too!"
 
-CONTENT
+YAML
 
-config = Configurable::Configuration.configure(yaml)
+configuration = Configurable::Configuration.configure(yaml)
 
-puts config.example_one
-puts config.example_two
+puts configuration.example_one
+puts configuration.example_two
 
 
 # With YAML (file)
 
-config = Configurable::Configuration.configure(File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec', 'fixtures', 'configuration.yml')))
+configuration = Configurable::Configuration.configure(File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec', 'fixtures', 'configuration.yml')))
 
-puts config.first_name
-puts config.location
+puts configuration.first_name
+puts configuration.location
 
 
 # Or go nuts (inline yaml and block)
 
-yaml = <<CONTENT
+yaml = <<YAML
 
 example_three: "Oooooo"
 example_four: "It loads from YAML too!"
 
-CONTENT
+YAML
 
-config = Configurable::Configuration.configure(yaml) do |config|
+configuration = Configurable::Configuration.configure(yaml) do |config|
   config.example_one = "One"
   config.example_two = "Two"
 end
 
-puts config.example_one
-puts config.example_two
-puts config.example_three
-puts config.example_four
+puts configuration.example_one
+puts configuration.example_two
+puts configuration.example_three
+puts configuration.example_four
 
 # Good for things like this
 
-c = Configurable::Configuration.configure do |config|
+Config = Configurable::Configuration.configure do |config|
   config.support_email    = "goaway@example.com"
   config.google_analytics = "UA-x343x-SDS"
   
@@ -64,10 +64,10 @@ c = Configurable::Configuration.configure do |config|
   config.twitter.password    = "somepass"
 end
 
-puts c.support_email
-puts c.google_analytics
-puts c.twitter[:screen_name]
-puts c.twitter[:password]
+puts Config.support_email
+puts Config.google_analytics
+puts Config.twitter[:screen_name]
+puts Config.twitter[:password]
 
-puts c.twitter.screen_name
-puts c.twitter.password
+puts Config.twitter.screen_name
+puts Config.twitter.password
