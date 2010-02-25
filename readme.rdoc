@@ -87,7 +87,7 @@ Conceptually you could continue to nest configuration blocks as far as you wish.
 
 == Usage (within frameworks)
 
-Configurable is intended to be framework agnostic, therefore it's easy to get it going in Rails/Sinatra/Hot New Framework.
+Configurable is intended to be framework agnostic, but it's easy to get it going within Rails/Sinatra/Hot New Framework app.
 
 === Rails
 
