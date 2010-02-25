@@ -12,7 +12,7 @@ Configurable aims to provide a more Ruby-like interface to configuring and readi
 
 == Installation
 
-The project is hosted on RubyGems.org. Getting it is simple:
+The project is hosted on rubygems.org. Getting it is simple:
 
   gem install <gem name>
 
@@ -25,7 +25,7 @@ There are a variety of ways in which you can use Configurable:
 * From a YAML file
 * A mixture of YAML and block configuration
 
-The following examples can also be found and run in _examples/all.rb_.
+The following examples can also be found and run in examples/all.rb.
 
 === Standalone Block
 
@@ -91,7 +91,7 @@ Configurable is intended to be framework agnostic, therefore it's easy to get it
 
 === Rails
 
-You can use Configurable within Rails quite easily. I don't really plan to provide any _out of the box_ way to hook Configurable into Rails but it's quite easy to implement:
+You can use Configurable within Rails quite easily. I don't really plan to provide any "out of the box" way to hook Configurable into Rails but it's quite easy to implement:
 
   # In config/configuration.rb
   Config = Configurable::Configuration.configure(Rails.root.join("config", "environments", "#{Rails.env}.yml")) do |config|
@@ -108,7 +108,7 @@ By requiring a different YAML file based on the environment it is easy to overri
 
 === Sinatra
 
-A quick and dirty solution would be to pop it in a _configure_ block:
+A quick and dirty solution would be to pop it in a configure block:
 
   configure do
     Config = Configurable::Configuration.configure(File.join("#{environment}.yml")) do |config|
