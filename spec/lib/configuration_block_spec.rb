@@ -1,5 +1,6 @@
 module Configr
   describe ConfigurationBlock do
+    
     before do
       @hash  = { :one => "one", :two => "two" }
       @block = ConfigurationBlock.new(@hash)
@@ -48,5 +49,6 @@ module Configr
       @block.five.six.class.should       == ConfigurationBlock
       @block.five.six.seven.class.should == ConfigurationBlock
     end
+    
   end
 end

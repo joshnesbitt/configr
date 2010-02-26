@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "configr"
-    gem.summary = "A more Rubyish approach to creating and accessing configuration values."
-    gem.description = "Configr aims to provide a more Ruby-like interface to configuring and reading a set of configuration values. The idea evolved from using a standard hash as a configuration store into a more elegant way to declare and read values from within a hash. "
+    gem.summary = "A more elegant approach to creating and accessing configuration values."
+    gem.description = "Configr aims to provide a clean interface to configuring and reading a set of configuration values. The idea evolved from using a standard hash as a configuration store into a more elegant way to declare and read values from within a hash. "
     gem.email = "josh@josh-nesbitt.net"
     gem.homepage = "http://github.com/joshnesbitt/configr"
     gem.authors = ["Josh Nesbitt"]

@@ -1,7 +1,7 @@
 module Configr
   describe Hash do
     
-    it "should create a ConfigurableHash from an existing hash" do
+    it "should create a Configr Hash from an existing hash" do
       hash = Hash.new({ :one => "one", :two => "two" })
       
       hash[:one].should == "one"
@@ -11,10 +11,16 @@ module Configr
     it "should symbolize a set of string keys" do
       hash = Hash.new({ "one" => "one", "two" => "two" })
       
+      hash["one"].should == "one"
+      hash["two"].should == "two"
+      
       hash[:one].should be_nil
       hash[:two].should be_nil
       
       hash.symbolize_keys!
+      
+      hash["one"].should be_nil
+      hash["two"].should be_nil
       
       hash[:one].should == "one"
       hash[:two].should == "two"
@@ -23,11 +29,19 @@ module Configr
     it "should recursively symbolize a set of string keys" do
       hash = Hash.new({ "one" => "one", "two" => "two", "three" => { "four" => "four" } })
       
+      hash["one"].should   == "one"
+      hash["two"].should   == "two"
+      hash["three"]["four"].should == "four"
+      
       hash[:one].should be_nil
       hash[:two].should be_nil
       hash[:three].should be_nil
       
       hash.recursive_symbolize_keys!
+      
+      hash["one"].should be_nil
+      hash["two"].should be_nil
+      hash["three"].should be_nil
       
       hash[:one].should == "one"
       hash[:two].should == "two"
@@ -56,11 +70,12 @@ module Configr
       hash[:three][:five].class.should == Configr::Hash
     end
     
-    it "should utilise method missing to provide access to hash keys" do
+    it "should allow method based access to hash keys" do
       hash = Hash.new({ :one => "one", :two => "two" })
       
       hash.one.should == "one"
       hash.two.should == "two"
     end
+    
   end
 end
