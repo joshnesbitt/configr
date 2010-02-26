@@ -1,4 +1,4 @@
-module Configurable
+module Configr
   module HashExtensions
     def symbolize_keys!
       self.each { |k, v|
@@ -44,6 +44,6 @@ module Configurable
 end
 
 class Hash
-  include Configurable::HashExtensions
+  include Configr::HashExtensions
   
 end

@@ -1,5 +1,4 @@
 # A simple alternative to autotest that isnt as painful
-puts ">> Watching spec folder for changes..."
 
 options = {
   :options => "--require 'spec/spec_helper' --format nested --color",

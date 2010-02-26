@@ -1,8 +1,8 @@
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'configurable'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'configr'))
 
 # Standalone (without YAML)
 
-configuration = Configurable::Configuration.configure do |config|
+configuration = Configr::Configuration.configure do |config|
   config.example_one = "One"
   config.example_two = "Two"
 end
@@ -21,7 +21,7 @@ example_two: "It loads from YAML too!"
 
 YAML
 
-configuration = Configurable::Configuration.configure(yaml)
+configuration = Configr::Configuration.configure(yaml)
 
 puts configuration.example_one
 puts configuration.example_two
@@ -29,7 +29,7 @@ puts configuration.example_two
 
 # With YAML (file)
 
-configuration = Configurable::Configuration.configure(File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec', 'fixtures', 'configuration.yml')))
+configuration = Configr::Configuration.configure(File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec', 'fixtures', 'configuration.yml')))
 
 puts configuration.first_name
 puts configuration.location
@@ -44,7 +44,7 @@ example_four: "It loads from YAML too!"
 
 YAML
 
-configuration = Configurable::Configuration.configure(yaml) do |config|
+configuration = Configr::Configuration.configure(yaml) do |config|
   config.example_one = "One"
   config.example_two = "Two"
 end
@@ -56,7 +56,7 @@ puts configuration.example_four
 
 # Good for things like this
 
-Config = Configurable::Configuration.configure do |config|
+Config = Configr::Configuration.configure do |config|
   config.support_email    = "goaway@example.com"
   config.google_analytics = "UA-x343x-SDS"
   

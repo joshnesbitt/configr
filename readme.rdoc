@@ -1,4 +1,4 @@
-= Configurable
+= Configr
 
 * Overview
 * Installation
@@ -8,7 +8,7 @@
 
 == Overview
 
-Configurable aims to provide a more Ruby-like interface to configuring and reading a set of configuration values. The idea evolved from using a standard hash as a configuration store into a more elegant way to declare and read values from within a hash.
+Configr aims to provide a more Ruby-like interface to configuring and reading a set of configuration values. The idea evolved from using a standard hash as a configuration store into a more elegant way to declare and read values from within a hash.
 
 == Installation
 
@@ -18,7 +18,7 @@ The project is hosted on rubygems.org. Getting it is simple:
 
 == Usage
 
-There are a variety of ways in which you can use Configurable:
+There are a variety of ways in which you can use Configr:
 
 * Standalone block
 * From inline YAML
@@ -29,7 +29,7 @@ The following examples can also be found and run in examples/all.rb.
 
 === Standalone Block
 
-  configuration = Configurable::Configuration.configure do |config|
+  configuration = Configr::Configuration.configure do |config|
     config.example_one = "One"
     config.example_two = "Two"
   end
@@ -39,7 +39,7 @@ The following examples can also be found and run in examples/all.rb.
 
 Conceptually you could continue to nest configuration blocks as far as you wish. They exist to enable you to seperate your configuration values into contexts. Take for example a set of email configuration values:
 
-  Configurable::Configuration.configure do |config|
+  Configr::Configuration.configure do |config|
     config.email.from_address  = "hello@example.com"
     config.email.from_name     = "My Company"
     config.email.reply_address = "reply@example.com"
@@ -54,14 +54,14 @@ Conceptually you could continue to nest configuration blocks as far as you wish.
   
   YAML
   
-  configuration = Configurable::Configuration.configure(yaml)
+  configuration = Configr::Configuration.configure(yaml)
 
   puts configuration.example_one
   puts configuration.example_two
 
 === From a YAML file
 
-  configuration = Configurable::Configuration.configure("/path/to/file.yml")
+  configuration = Configr::Configuration.configure("/path/to/file.yml")
   
   puts configuration.value_one
   puts configuration.value_two
@@ -75,7 +75,7 @@ Conceptually you could continue to nest configuration blocks as far as you wish.
 
   YAML
   
-  configuration = Configurable::Configuration.configure(yaml) do |config|
+  configuration = Configr::Configuration.configure(yaml) do |config|
     config.example_one = "One"
     config.example_two = "Two"
   end
@@ -87,14 +87,14 @@ Conceptually you could continue to nest configuration blocks as far as you wish.
 
 == Usage (within frameworks)
 
-Configurable is intended to be framework agnostic, but it's easy to get it going within Rails/Sinatra/Hot New Framework app.
+Configr is intended to be framework agnostic, but it's easy to get it going within Rails/Sinatra/Hot New Framework app.
 
 === Rails
 
-You can use Configurable within Rails quite easily. I don't really plan to provide any "out of the box" way to hook Configurable into Rails but it's quite easy to implement:
+You can use Configr within Rails quite easily. I don't really plan to provide any "out of the box" way to hook Configr into Rails but it's quite easy to implement:
 
   # In config/configuration.rb
-  Config = Configurable::Configuration.configure(Rails.root.join("config", "environments", "#{Rails.env}.yml")) do |config|
+  Config = Configr::Configuration.configure(Rails.root.join("config", "environments", "#{Rails.env}.yml")) do |config|
     config.my.configuration.value = "value"
   end
   
@@ -111,7 +111,7 @@ By requiring a different YAML file based on the environment it is easy to overri
 A quick and dirty solution would be to pop it in a configure block:
 
   configure do
-    Config = Configurable::Configuration.configure(File.join("#{environment}.yml")) do |config|
+    Config = Configr::Configuration.configure(File.join("#{environment}.yml")) do |config|
       config.something = "value"
     end
   end

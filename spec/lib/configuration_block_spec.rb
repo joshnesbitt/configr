@@ -1,12 +1,12 @@
-module Configurable
+module Configr
   describe ConfigurationBlock do
     before do
       @hash  = { :one => "one", :two => "two" }
       @block = ConfigurationBlock.new(@hash)
     end
     
-    it "should convert a standard Hash to a ConfigurableHash on creation" do
-      @block.attributes.class.should == Configurable::Hash
+    it "should convert a standard Hash to a Configr Hash on creation" do
+      @block.attributes.class.should == Configr::Hash
     end
     
     it "should assign a value when the missing method looks likes a setter" do

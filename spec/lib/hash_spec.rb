@@ -1,4 +1,4 @@
-module Configurable
+module Configr
   describe Hash do
     
     it "should create a ConfigurableHash from an existing hash" do
@@ -34,17 +34,17 @@ module Configurable
       hash[:three][:four].should == "four"
     end
     
-    it "should normalize a set of Hash values to a Configurable Hash if they are themselves Hashes" do
+    it "should normalize a set of Hash values to a Configr Hash if they are themselves Hashes" do
       hash = Hash.new({ "one" => "one", "two" => "two", "three" => { "four" => "four" } })
       
       hash["three"].class.should == ::Hash
       
       hash.normalize!
       
-      hash[:three].class.should == Configurable::Hash
+      hash[:three].class.should == Configr::Hash
     end
     
-    it "should recursively normalize a set of Hash values to a Configurable Hash if they are themselves Hashes" do
+    it "should recursively normalize a set of Hash values to a Configr Hash if they are themselves Hashes" do
       hash = Hash.new({ "one" => "one", "two" => "two", "three" => { "four" => "four", "five" => { "six" => "six" } } })
       
       hash["three"].class.should         == ::Hash
@@ -52,8 +52,8 @@ module Configurable
       
       hash.recursive_normalize!
       
-      hash[:three].class.should        == Configurable::Hash
-      hash[:three][:five].class.should == Configurable::Hash
+      hash[:three].class.should        == Configr::Hash
+      hash[:three][:five].class.should == Configr::Hash
     end
     
     it "should utilise method missing to provide access to hash keys" do

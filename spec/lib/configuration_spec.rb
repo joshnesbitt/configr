@@ -1,4 +1,4 @@
-module Configurable
+module Configr
   describe Configuration do
 
     it "should have the #configure class method to instantiate the configuration" do
@@ -26,7 +26,7 @@ module Configurable
         config.key = "value"
       end
 
-      lambda { configuration.key = "othervalue" }.should raise_error(Configurable::ConfigurationLocked)
+      lambda { configuration.key = "othervalue" }.should raise_error(Configr::ConfigurationLocked)
     end
 
     it "should report a value being present on #attribute?" do

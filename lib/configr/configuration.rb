@@ -3,7 +3,7 @@ require 'hash'
 require 'errors'
 require 'configuration_block'
 
-module Configurable
+module Configr
   class Configuration
     attr_accessor :base, :attributes, :yaml
     

@@ -4,14 +4,13 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "configurable"
-    gem.summary = "mygem"
-    gem.description = "desc"
+    gem.name = "configr"
+    gem.summary = "A more Rubyish approach to creating and accessing configuration values."
+    gem.description = "Configr aims to provide a more Ruby-like interface to configuring and reading a set of configuration values. The idea evolved from using a standard hash as a configuration store into a more elegant way to declare and read values from within a hash. "
     gem.email = "josh@josh-nesbitt.net"
-    gem.homepage = "http://github.com/joshnesbitt/configurable"
+    gem.homepage = "http://github.com/joshnesbitt/configr"
     gem.authors = ["Josh Nesbitt"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
@@ -31,7 +30,6 @@ Spec::Rake::SpecTask.new(:rcov) do |spec|
 end
 
 task :spec => :check_dependencies
-
 task :default => :spec
 
 require 'rake/rdoctask'

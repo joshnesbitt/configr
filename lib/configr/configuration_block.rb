@@ -1,4 +1,4 @@
-module Configurable
+module Configr
   class ConfigurationBlock
     attr_accessor :attributes
 
