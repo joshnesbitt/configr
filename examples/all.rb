@@ -1,5 +1,6 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'configr'))
 
+
 # Standalone (without YAML)
 
 configuration = Configr::Configuration.configure do |config|
@@ -54,20 +55,21 @@ puts configuration.example_two
 puts configuration.example_three
 puts configuration.example_four
 
-# Good for things like this
+# Example of real world usage
 
 Configuration = Configr::Configuration.configure do |config|
-  config.support_email    = "goaway@example.com"
-  config.google_analytics = "UA-x343x-SDS"
+  config.email.from_address = "goaway@example.com"
+  config.email.from_name    = "Someone"
   
   config.twitter.screen_name = "someone"
   config.twitter.password    = "somepass"
+  
+  config.wiki_url = "wiki.example.com"
 end
 
-puts Configuration.support_email
-puts Configuration.google_analytics
+puts Configuration.wiki_url
 puts Configuration.twitter[:screen_name]
 puts Configuration.twitter[:password]
 
-puts Configuration.twitter.screen_name
-puts Configuration.twitter.password
+puts Configuration.email.from_address
+puts Configuration.email.from_name
