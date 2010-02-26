@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Josh Nesbitt"]
   s.date = %q{2010-02-26}
-  s.description = %q{Configr aims to provide a clean interface to configuring and reading a set of configuration values. The idea evolved from using a standard hash as a configuration store into a more elegant way to declare and read values from within a hash. }
+  s.description = %q{ Configr aims to provide a clean interface to configuring and reading a set of configuration values. The idea evolved from using a standard hash as a configuration store into a more elegant way to declare and read values from within a hash. }
   s.email = %q{josh@josh-nesbitt.net}
   s.extra_rdoc_files = [
     "LICENSE"
