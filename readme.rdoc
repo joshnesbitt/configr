@@ -94,7 +94,7 @@ Configr is intended to be framework agnostic, but it's easy to get it going with
 You can use Configr within Rails quite easily. I don't really plan to provide any "out of the box" way to hook Configr into Rails but it's quite easy to implement:
 
   # In config/configuration.rb
-  Config = Configr::Configuration.configure(Rails.root.join("config", "environments", "#{Rails.env}.yml")) do |config|
+  Configuration = Configr::Configuration.configure(Rails.root.join("config", "environments", "#{Rails.env}.yml")) do |config|
     config.my.configuration.value = "value"
   end
   
@@ -102,7 +102,7 @@ You can use Configr within Rails quite easily. I don't really plan to provide an
   require Rails.root.join("config", "configuration.rb")
   
   # Anywhere in your Rails app
-  Config.my.configuration.value
+  Configuration.my.configuration.value
 
 By requiring a different YAML file based on the environment it is easy to override global values with environment specific values.
 
@@ -111,7 +111,7 @@ By requiring a different YAML file based on the environment it is easy to overri
 A quick and dirty solution would be to pop it in a configure block:
 
   configure do
-    Config = Configr::Configuration.configure(File.join("#{environment}.yml")) do |config|
+    Configuration = Configr::Configuration.configure(File.join("#{environment}.yml")) do |config|
       config.something = "value"
     end
   end

@@ -56,7 +56,7 @@ puts configuration.example_four
 
 # Good for things like this
 
-Config = Configr::Configuration.configure do |config|
+Configuration = Configr::Configuration.configure do |config|
   config.support_email    = "goaway@example.com"
   config.google_analytics = "UA-x343x-SDS"
   
@@ -64,10 +64,10 @@ Config = Configr::Configuration.configure do |config|
   config.twitter.password    = "somepass"
 end
 
-puts Config.support_email
-puts Config.google_analytics
-puts Config.twitter[:screen_name]
-puts Config.twitter[:password]
+puts Configuration.support_email
+puts Configuration.google_analytics
+puts Configuration.twitter[:screen_name]
+puts Configuration.twitter[:password]
 
-puts Config.twitter.screen_name
-puts Config.twitter.password
+puts Configuration.twitter.screen_name
+puts Configuration.twitter.password
