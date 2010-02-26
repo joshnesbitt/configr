@@ -5,12 +5,6 @@ require 'configuration_block'
 
 module Configr
   class Configuration
-    attr_accessor :base, :attributes, :yaml
-    
-    def initialize(yaml=nil)
-      self.base = ConfigurationBlock.new
-      self.yaml = yaml
-    end
     
     def self.configure(yaml=nil)
       instance = self.new(yaml)
@@ -24,6 +18,13 @@ module Configr
       instance.attributes.recursive_normalize!
       
       instance
+    end
+    
+    attr_accessor :base, :attributes, :yaml
+    
+    def initialize(yaml=nil)
+      self.base = ConfigurationBlock.new
+      self.yaml = yaml
     end
     
     def [](value)
@@ -45,6 +46,8 @@ module Configr
     
     def merge_configurations!
       return unless self.yaml
+      
+      self.yaml = self.yaml.to_s
       
       hash = if File.exists?(self.yaml)
         YAML.load_file(self.yaml)
