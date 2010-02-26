@@ -1,15 +1,16 @@
 module Configr
   module HashExtensions
     def symbolize_keys!
-      self.each { |k, v|
-        self.delete(k.to_s);
+      each do |k, v|
+        self.delete(k.to_s)
         self[k.to_sym] = v
-      }
+      end
     end
     
     def recursive_symbolize_keys!
-      self.symbolize_keys!
-      self.values.select{ |value|
+      symbolize_keys!
+      
+      values.select { |value|
         value.is_a?(::Hash) || value.is_a?(Hash)
       }.each{ |hash|
         hash.recursive_symbolize_keys!

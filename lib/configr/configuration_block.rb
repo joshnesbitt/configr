@@ -1,7 +1,7 @@
 module Configr
   class ConfigurationBlock
     attr_accessor :attributes
-
+    
     def initialize(attributes={})
       self.attributes = Hash.new(attributes)
     end
