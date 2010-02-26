@@ -6,18 +6,18 @@ require 'configuration_block'
 module Configr
   class Configuration
     
-    def self.configure(yaml=nil)
-      instance = self.new(yaml)
-      
-      yield instance.base if block_given?
-      
-      instance.attributes = instance.base.attributes
-      
-      instance.merge_configurations!
-      
-      instance.attributes.recursive_normalize!
-      
-      instance
+    class << self
+      def configure(yaml=nil)
+        instance = self.new(yaml)
+        
+        yield instance.base if block_given?
+        
+        instance.attributes = instance.base.attributes
+        instance.merge_configurations!
+        instance.attributes.recursive_normalize!
+        
+        instance
+      end
     end
     
     attr_accessor :base, :attributes, :yaml
@@ -36,7 +36,7 @@ module Configr
       
       case
       when name.include?("=")
-        raise ConfigurationLocked, "Blocked from configuring values after configuration has been run."
+        raise ConfigurationLocked, "Configuration is locked from configuring values after the configuration has been run."
       when name.include?("?")
         !self.attributes[name.gsub("?", "").to_sym].nil?
       else
@@ -54,6 +54,8 @@ module Configr
       else
         YAML.load(self.yaml)
       end
+      
+      return unless hash
       
       hash = Hash.new(hash)
       hash.recursive_symbolize_keys!
