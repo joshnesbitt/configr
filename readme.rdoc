@@ -14,7 +14,7 @@ Configr aims to provide a more Ruby-like interface to configuring and reading a 
 
 The project is hosted on rubygems.org. Getting it is simple:
 
-  gem install <gem name>
+  gem install configr
 
 == Usage
 
