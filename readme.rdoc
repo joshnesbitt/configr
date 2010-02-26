@@ -11,7 +11,7 @@
 
 == Overview
 
-Configr aims to provide a clean interface to configuring and reading a set of configuration values. The idea evolved from using a standard hash as a configuration store into a more elegant way to declare and read values from within a hash.
+Configr aims to provide a clean interface for configuring and reading a set of configuration values. The idea evolved from using a standard hash as a configuration store into a more elegant way to declare and read values from within a hash.
 
 
 
@@ -142,7 +142,7 @@ Again, by requiring a different YAML file based on the environment it is easy to
 
 == A note about locking
 
-By design a configuration value is not meant to be edited or created after the configuration block has been run (if you do you will run into a Configr::ConfigurationLocked error when assigning a value on the top level). In my opinion configurations such as those created in Configr are meant to be read-only during the lifetime of the application. Configr could however be altered to allow this with a patch should it be required.
+By design a configuration value is not meant to be edited or created after the configuration block has been run (if you do you will run into a Configr::ConfigurationLocked error when assigning a value on the top level). In my opinion configurations such as those created by Configr are meant to be read-only during the lifetime of the application. Configr could however be altered to allow this with a patch should it be required.
 
 
 
