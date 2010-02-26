@@ -4,17 +4,24 @@
 * Installation
 * Usage
 * Usage (within frameworks)
+* Locking
+* Bugs
 * Contributors
+
 
 == Overview
 
 Configr aims to provide a more Ruby-like interface to configuring and reading a set of configuration values. The idea evolved from using a standard hash as a configuration store into a more elegant way to declare and read values from within a hash.
+
+
 
 == Installation
 
 The project is hosted on rubygems.org. Getting it is simple:
 
   gem install configr
+
+
 
 == Usage
 
@@ -23,9 +30,10 @@ There are a variety of ways in which you can use Configr:
 * Standalone block
 * From inline YAML
 * From a YAML file
-* A mixture of YAML and block configuration
+* A mixture of a YAML and block configuration
 
 The following examples can also be found and run in examples/all.rb.
+
 
 === Standalone Block
 
@@ -37,13 +45,17 @@ The following examples can also be found and run in examples/all.rb.
   puts configuration.example_one
   puts configuration.example_two
 
-Conceptually you could continue to nest configuration blocks as far as you wish. They exist to enable you to seperate your configuration values into contexts. Take for example a set of email configuration values:
+Conceptually you could continue to nest configuration blocks as far as you wish. They exist to enable you to separate your configuration values into contexts. Take for example a set of email configuration values:
 
   Configr::Configuration.configure do |config|
     config.email.from_address  = "hello@example.com"
     config.email.from_name     = "My Company"
     config.email.reply_address = "reply@example.com"
   end
+
+  puts configuration.email.from_address
+  puts configuration.email.from_name
+  puts configuration.email.reply_address
 
 === From an inline YAML string
 
@@ -59,6 +71,7 @@ Conceptually you could continue to nest configuration blocks as far as you wish.
   puts configuration.example_one
   puts configuration.example_two
 
+
 === From a YAML file
 
   configuration = Configr::Configuration.configure("/path/to/file.yml")
@@ -66,35 +79,41 @@ Conceptually you could continue to nest configuration blocks as far as you wish.
   puts configuration.value_one
   puts configuration.value_two
 
+
 === A mixture of any of the above
 
   yaml = <<YAML
 
-  example_three: "Oooooo"
-  example_four: "It loads from YAML too!"
-
+  example_three: "three"
+  example_four: "four"
+  
   YAML
   
   configuration = Configr::Configuration.configure(yaml) do |config|
-    config.example_one = "One"
-    config.example_two = "Two"
+    config.example_one = "one"
+    config.example_two = "two"
   end
-
+  
   puts configuration.example_one
   puts configuration.example_two
   puts configuration.example_three
   puts configuration.example_four
 
+
+
 == Usage (within frameworks)
 
-Configr is intended to be framework agnostic, but it's easy to get it going within Rails/Sinatra/Hot New Framework app.
+Configr is intended to be framework agnostic, but it's easy to get it going inside of Rails/Sinatra/Hot New Framework.
+
 
 === Rails
 
-You can use Configr within Rails quite easily. I don't really plan to provide any "out of the box" way to hook Configr into Rails but it's quite easy to implement:
+You can use Configr within Rails quite easily. I don't plan to provide any "out of the box" way to hook Configr into Rails but it's quite easy to implement:
 
   # In config/configuration.rb
-  Configuration = Configr::Configuration.configure(Rails.root.join("config", "environments", "#{Rails.env}.yml")) do |config|
+  yaml_file = Rails.root.join("config", "environments", "#{Rails.env}.yml")
+  
+  Configuration = Configr::Configuration.configure(yaml_file) do |config|
     config.my.configuration.value = "value"
   end
   
@@ -106,21 +125,38 @@ You can use Configr within Rails quite easily. I don't really plan to provide an
 
 By requiring a different YAML file based on the environment it is easy to override global values with environment specific values.
 
+
 === Sinatra
 
 A quick and dirty solution would be to pop it in a configure block:
 
   configure do
-    Configuration = Configr::Configuration.configure(File.join("#{environment}.yml")) do |config|
+    Configuration = Configr::Configuration.configure("config/file.yml") do |config|
       config.something = "value"
     end
   end
 
 Again, by requiring a different YAML file based on the environment it is easy to override global values with environment specific values.
 
+
+
+== A note about locking
+
+By design a configuration value is not meant to be edited or created after the configuration block has been run (if you do you will run into a Configr::ConfigurationLocked error when assigning a value on the top level). In my opinion configurations such as those created in Configr are meant to be read-only during the lifetime of the application. Configr could however be altered to allow this with a patch should it be required.
+
+
+
+== Bugs
+
+If you have any problems with Configr, please file an issue at http://github.com/joshnesbitt/configr/issues.
+
+
+
 == Contributors
 
 * Thomas Williams for the concept of nested configuration blocks.
+
+
 
 == Note on Patches/Pull Requests
  
@@ -131,6 +167,8 @@ Again, by requiring a different YAML file based on the environment it is easy to
 * Commit, do not mess with rakefile, version, or history.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
+
+
 
 == Copyright
 
