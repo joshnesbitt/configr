@@ -13,6 +13,9 @@ module Configr
       when name.include?('=')
         key = name.gsub('=','').to_sym
         self.attributes[key] = args.first
+      when name.include?("?")
+        key = name.gsub('?','').to_sym
+        !self.attributes[key].nil?
       when existing_block_attributes = self.attributes[method]
         existing_block = ConfigurationBlock.new(existing_block_attributes)
         self.attributes[method] = existing_block.attributes

@@ -50,5 +50,17 @@ module Configr
       @block.five.six.seven.class.should == ConfigurationBlock
     end
     
+    it "should return true when using the #method? for asserting a values presence" do
+      @block.variable = "value"
+      @block.another.variable.set = "something"
+      
+      @block.variable?.should             == true
+      @block.another.variable.set?.should == true
+      
+      @block.exists?.should == false
+      @block.exists = "value"
+      @block.exists?.should == true
+    end
+    
   end
 end

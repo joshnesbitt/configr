@@ -39,7 +39,17 @@ module Configr
     end
     
     def method_missing(method, *args, &block)
-      self[method]
+      name = method.to_s
+      
+      case
+      when name.include?("=")
+        raise ConfigurationLocked, "Configuration is locked from configuring values after the configuration has been run."
+      when name.include?('?')
+        key = name.gsub('?','').to_sym
+        !self[key].nil?
+      else
+        self[method]
+      end
     end
   end
 end

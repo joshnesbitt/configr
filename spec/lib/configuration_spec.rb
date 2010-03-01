@@ -30,6 +30,16 @@ module Configr
       configuration.other_value?.should == false
     end
     
+    it "should return true on a value being present when using the #method? within a nested block" do
+      configuration = Configuration.configure do |config|
+        config.one.two.three = "value"
+      end
+      puts configuration.inspect
+      configuration.one.two.three?.should == true
+      configuration.one.two.five?.should  == false
+    end
+    
+    
     it "should raise an error when an existing value attempts to be updated once configuration has been run" do
       configuration = Configuration.configure do |config|
         config.key = "value"

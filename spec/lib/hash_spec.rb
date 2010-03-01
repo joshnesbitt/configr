@@ -77,5 +77,19 @@ module Configr
       hash.two.should == "two"
     end
     
+    it "should return true when using the #method? for asserting a values presence" do
+      hash = Hash.new({ :one => "one", :two => "two" })
+      
+      hash.one?.should   == true
+      hash.two?.should   == true
+      hash.three?.should == false
+    end
+    
+    it "should raise an error when a value is assigned" do
+      hash = Hash.new({ :one => "one", :two => "two" })
+      
+      lambda { hash.some_value = "this" }.should raise_error(Configr::ConfigurationLocked)
+    end
+    
   end
 end
