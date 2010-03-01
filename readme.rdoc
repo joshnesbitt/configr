@@ -116,7 +116,7 @@ Configr is intended to be framework agnostic, but it's easy to get it going insi
 
 === Rails
 
-You can use Configr within Rails quite easily. I don't plan to provide any "out of the box" way to hook Configr into Rails but it's quite easy to implement:
+You can use Configr within Rails quite easily. I don't plan to provide any "out of the box" way to hook Configr into Rails but it's easy to implement:
 
   # In config/configuration.rb
   yaml_file = Rails.root.join("config", "environments", "#{Rails.env}.yml")
