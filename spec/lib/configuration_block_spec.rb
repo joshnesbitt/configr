@@ -60,6 +60,8 @@ module Configr
       @block.exists?.should == false
       @block.exists = "value"
       @block.exists?.should == true
+      
+      @block.another.variable.missing?.should == false
     end
     
   end

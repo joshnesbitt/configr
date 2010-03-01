@@ -34,11 +34,12 @@ module Configr
       configuration = Configuration.configure do |config|
         config.one.two.three = "value"
       end
-      puts configuration.inspect
+      
+      configuration.one?.should           == true
+      configuration.one.two?.should       == true
       configuration.one.two.three?.should == true
       configuration.one.two.five?.should  == false
     end
-    
     
     it "should raise an error when an existing value attempts to be updated once configuration has been run" do
       configuration = Configuration.configure do |config|

@@ -99,11 +99,19 @@ Conceptually you could continue to nest configuration blocks as far as you wish.
   puts configuration.example_three
   puts configuration.example_four
 
+=== Asserting key presence
+
+Sometimes when using configuration values you might want to assert whether the value exists before using it. Configr allows you to do this the #key_name? methods:
+  
+  puts configuration.example_one? # => true
+  puts configuration.doesnt_exist? # => false
+
 
 
 == Usage (within frameworks)
 
 Configr is intended to be framework agnostic, but it's easy to get it going inside of Rails/Sinatra/Hot New Framework.
+
 
 
 === Rails
@@ -142,7 +150,7 @@ Again, by requiring a different YAML file based on the environment it is easy to
 
 == A note about locking
 
-By design a configuration value is not meant to be edited or created after the configuration block has been run (if you do you will run into a Configr::ConfigurationLocked error when assigning a value on the top level). In my opinion configurations such as those created by Configr are meant to be read-only during the lifetime of the application. Configr could however be altered to allow this with a patch should it be required.
+By design a configuration value is not meant to be edited or created after the configuration block has been run (if you do you will run into a Configr::ConfigurationLocked error). In my opinion configurations such as those created by Configr are meant to be read-only during the lifetime of the application. Configr could however be altered to allow this with a simple patch should it be required.
 
 
 
