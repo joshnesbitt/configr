@@ -110,7 +110,7 @@ Sometimes when using configuration values you might want to assert whether the v
 
 == Usage (within frameworks)
 
-Configr is intended to be framework agnostic, but it's easy to get it going inside of Rails/Sinatra/Hot New Framework.
+Configr is intended to be framework agnostic, but it's easy to get it going inside of Rails/Sinatra.
 
 
 
