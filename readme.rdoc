@@ -101,7 +101,7 @@ Conceptually you could continue to nest configuration blocks as far as you wish.
 
 === Asserting key presence
 
-Sometimes when using configuration values you might want to assert whether the value exists before using it. Configr allows you to do this the #key_name? methods:
+Sometimes when using configuration values you might want to assert whether the value exists before using it. Configr allows you to do this with the #key_name? syntax:
   
   puts configuration.example_one? # => true
   puts configuration.doesnt_exist? # => false
