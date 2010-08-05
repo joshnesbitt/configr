@@ -1,10 +1,15 @@
 module Configr
   module HashExtensions
+    
     def symbolize_keys!
+      _hash = {}
+      
       each do |k, v|
         self.delete(k.to_s)
-        self[k.to_sym] = v
+        _hash[k.to_sym] = v
       end
+      
+      self.merge! _hash
     end
     
     def recursive_symbolize_keys!
@@ -56,5 +61,4 @@ end
 
 class Hash
   include Configr::HashExtensions
-  
 end
