@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{configr}
-  s.version = "0.9.0"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Josh Nesbitt"]
-  s.date = %q{2010-03-01}
+  s.date = %q{2010-08-05}
   s.description = %q{Configr aims to provide a clean interface to configuring and reading a set of configuration values. The idea evolved from using a standard hash as a configuration store into a more elegant way to declare and read values from within a hash. }
   s.email = %q{josh@josh-nesbitt.net}
   s.extra_rdoc_files = [
@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/joshnesbitt/configr}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{An elegant approach to creating and accessing configuration values.}
   s.test_files = [
     "spec/lib/configuration_block_spec.rb",
