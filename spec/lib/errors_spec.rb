@@ -1,5 +1,5 @@
 module Configr
-  describe Hash do
+  describe ConfigrError do
     
     it "should have a base error class" do
       error = Configr::ConfigrError.new("Error data")
